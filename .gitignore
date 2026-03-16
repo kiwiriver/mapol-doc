@@ -1,3 +1,6 @@
+#clean folder
+#git rm -r --cached **/.ipynb_checkpoints
+
 # Ignore everything
 *
 
