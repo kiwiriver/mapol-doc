@@ -1,11 +1,13 @@
-#clean folder
-#git rm -r --cached **/.ipynb_checkpoints
+# Ignore Jupyter checkpoint dirs anywhere
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
 
 # Ignore everything
 *
 
-# Allow directories so git can traverse them
+# Allow directories, except checkpoints
 !*/
+.ipynb_checkpoints/
 
 # Allow markdown files
 !*.md
@@ -15,3 +17,4 @@
 
 # Allow the gitignore file itself
 !.gitignore
+

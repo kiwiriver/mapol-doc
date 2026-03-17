@@ -1,6 +1,6 @@
-## Data Products and Format
+# Data Products and Format
 
-### Overview
+## Overview
 
 FastMAPOL (Fast Multi-Angle Polarimetric Ocean and Land algorithm) produces Level-2 (L2) geophysical retrievals of aerosol and surface properties from the multi-angle polarimetric measurements of the **PACE polarimeters**, including **HARP2** and **SPEXone**.
 
@@ -18,7 +18,7 @@ The FastMAPOL Level-2 product is designed to support:
 
 ---
 
-### File Organization
+## File Organization
 
 The FastMAPOL Level-2 file is organized into several top-level groups. Each group contains variables associated with a specific component of the retrieval system.
 
@@ -31,9 +31,7 @@ The FastMAPOL Level-2 file is organized into several top-level groups. Each grou
 | sensor_band_parameters | Instrument spectral and angular parameters |
 | processing_control | Metadata and algorithm configuration |
 
----
-
-#### Dimensions
+### Dimensions
 
 The FastMAPOL Level-2 product uses a set of core dimensions describing spatial, spectral, and angular sampling.
 
@@ -46,7 +44,7 @@ The FastMAPOL Level-2 product uses a set of core dimensions describing spatial, 
 | intensity_bands_per_view | Intensity channels per view |
 | polarization_bands_per_view | Polarization channels per view |
 
-#### Instrument Differences
+### Instrument Differences
 
 **HARP2**
 
@@ -62,9 +60,7 @@ The FastMAPOL Level-2 product uses a set of core dimensions describing spatial, 
 
 A total of 34 specific wavelengths from the hyperspectral measurements for aerosol and surface retrieval.
 
----
-
-### Geolocation Data
+## Geolocation Data
 
 Group: `/geolocation_data`
 
@@ -75,17 +71,13 @@ Group: `/geolocation_data`
 
 These variables define the geographic location of each retrieval pixel.
 
----
-
-### Geophysical Retrieval Products
+## Geophysical Retrieval Products
 
 Group: `/geophysical_data`
 
 The geophysical group contains aerosol optical properties, aerosol microphysical parameters, and ocean color products retrieved by FastMAPOL.
 
----
-
-#### Aerosol Optical Properties
+### Aerosol Optical Properties
 
 | Variable | Dimensions | Description |
 |----------|-------------|-------------|
@@ -101,9 +93,7 @@ The geophysical group contains aerosol optical properties, aerosol microphysical
 
 These parameters describe aerosol optical loading and spectral behavior.
 
----
-
-#### Aerosol Microphysical Properties
+### Aerosol Microphysical Properties
 
 | Variable | Dimensions | Description |
 |----------|-------------|-------------|
@@ -121,9 +111,7 @@ These parameters describe aerosol optical loading and spectral behavior.
 
 These variables constrain aerosol particle size distribution, composition, and shape.
 
----
-
-#### Ocean Color Products
+### Ocean Color Products
 
 | Variable | Dimensions | Description |
 |----------|-------------|-------------|
@@ -138,18 +126,14 @@ The remote sensing reflectance represents ocean-leaving reflectance after atmosp
 
 Because the full angular arrays can be large, the Level-2 product typically includes the **angular mean and standard deviation**.
 
----
-
-#### Additional Surface Variables
+### Additional Surface Variables
 
 | Variable | Dimensions | Description |
 |----------|-------------|-------------|
 | wind_speed | (number_of_lines, pixels_per_line) | Surface wind speed |
 | chla | (number_of_lines, pixels_per_line) | Chlorophyll-a concentration |
 
----
-
-### Diagnostic Data
+## Diagnostic Data
 
 Group: `/diagnostic_data`
 
@@ -168,28 +152,24 @@ These variables describe retrieval convergence and performance.
 | ozone | (number_of_lines, pixels_per_line) | Total column ozone |
 | surface_pressure | (number_of_lines, pixels_per_line) | Surface pressure |
 
----
-
-#### Retrieval Quality Metrics
+### Retrieval Quality Metrics
 
 FastMAPOL retrievals are performed using an optimal estimation framework that minimizes the cost function
 
-\[
+$$
 \chi^2 = \frac{1}{N}\sum \frac{(f-m)^2}{\sigma^2}
-\]
+$$
 
 where
 
-- \(m\) is the measurement  
-- \(f\) is the forward model simulation  
-- \(\sigma\) is measurement uncertainty  
-- \(N\) is the number of measurements used in the retrieval.
+- $m$ is the measurement  
+- $f$ is the forward model simulation
+- $\sigma$ is measurement uncertainty  
+- $N$ is the number of measurements used in the retrieval.
 
-Lower values of \( \chi^2 \) indicate better agreement between measurements and forward model simulations.
+Lower values of $\chi^2$ indicate better agreement between measurements and forward model simulations.
 
----
-
-#### Retrieval Quality Flag
+### Retrieval Quality Flag
 
 A quality flag is provided to facilitate filtering and Level-3 processing.
 
@@ -205,9 +185,7 @@ The quality flag is determined from combinations of:
 - number of reflectance measurements
 - number of polarization measurements.
 
----
-
-#### Measurement Screening Masks
+### Measurement Screening Masks
 
 FastMAPOL performs adaptive measurement screening during the inversion.
 
@@ -225,9 +203,7 @@ Mask interpretation:
 
 These masks allow users to evaluate measurement quality at each viewing angle.
 
----
-
-### Sensor Band Parameters
+## Sensor Band Parameters
 
 Group: `/sensor_band_parameters`
 
@@ -235,5 +211,3 @@ Group: `/sensor_band_parameters`
 |----------|-------------|-------------|
 | wavelength | (wavelength) | Retrieval wavelengths |
 | sensor_view_angle | (number_of_views) | Viewing angle geometry |
-
----

@@ -1,6 +1,6 @@
-## Ocean Bio-Optical Model
+# Ocean Bio-Optical Model
 
-### Overview
+## Overview
 
 FastMAPOL retrieves ocean optical properties by coupling the aerosol retrieval with a forward radiative transfer model of ocean inherent optical properties (IOPs). The ocean optical properties are parameterized using bio-optical models that describe the spectral absorption and scattering of seawater constituents.
 
@@ -21,23 +21,17 @@ These models describe the spectral absorption and scattering properties of four 
 
 The total inherent optical properties are constructed from the contributions of these components.
 
----
+## Bio-1 Optical Model (Open Ocean)
 
-### Bio-1 Optical Model (Open Ocean)
-
-The **Bio-1 model** is a simplified bio-optical parameterization designed for **open ocean waters (Case-1 waters)**. The model is derived from the generalized Bio-2 model by imposing constraints on its parameters \citep{Zhai2015,Zhai2017}.
+The **Bio-1 model** is a simplified bio-optical parameterization designed for **open ocean waters (Case-1 waters)**. The model is derived from the generalized Bio-2 model by imposing constraints on its parameters (@Zhai:2015aa, @Zhai:2017aa).
 
 In this model, the optical properties are parameterized primarily as a function of chlorophyll concentration $[Chl\,a]$.
 
----
-
-#### Phytoplankton Absorption
+### Phytoplankton Absorption
 
 The phytoplankton absorption coefficient $a_{ph}$ follows the formulation defined in the generalized model (see Section 6.3).
 
----
-
-#### Particulate Absorption
+### Particulate Absorption
 
 For open ocean waters, the contribution of non-algal particles (NAP) is assumed negligible. Therefore the combined detrital and CDOM absorption coefficient $a_{dg}$ depends only on phytoplankton.
 
@@ -65,9 +59,7 @@ $$
 S_{dg} = 0.018.
 $$
 
----
-
-#### Particulate Backscattering
+### Particulate Backscattering
 
 The particulate backscattering coefficient $b_{bp}$ is also assumed to depend only on phytoplankton in open waters.
 
@@ -91,9 +83,7 @@ $$
 
 Outside this range, the slope is set to zero.
 
----
-
-#### Backscattering Fraction
+### Backscattering Fraction
 
 The particulate backscattering fraction is parameterized as
 
@@ -101,11 +91,9 @@ $$
 B_p = 0.002 + 0.01\left(0.5 - 0.25\log_{10}[Chl\,a]\right).
 $$
 
-The parameter $B_p$ is assumed to be **spectrally independent** \citep{Huot2008}.
+The parameter $B_p$ is assumed to be **spectrally independent** (@Huot:2008aa).
 
----
-
-### Bio-2 Optical Model (Five-Parameter Model)
+## Bio-2 Optical Model (Five-Parameter Model)
 
 The **Bio-2 model** describes optically complex coastal waters using a five-parameter parameterization.
 
@@ -124,9 +112,7 @@ $$
 B_w = 0.5.
 $$
 
----
-
-#### Phytoplankton Absorption
+### Phytoplankton Absorption
 
 Phytoplankton absorption is parameterized as
 
@@ -139,9 +125,7 @@ Here
 - $A_{ph}(\lambda)$ and $E_{ph}(\lambda)$ are empirical coefficients
 - $[Chl\,a]$ is chlorophyll concentration in mg m$^{-3}$.
 
----
-
-#### CDOM and Detrital Absorption
+### CDOM and Detrital Absorption
 
 The combined absorption coefficient of CDOM and NAP is modeled as
 
@@ -152,9 +136,7 @@ $$
 
 The parameter $S_{dg}$ represents the exponential spectral slope.
 
----
-
-#### Particulate Backscattering
+### Particulate Backscattering
 
 The particulate backscattering coefficient is modeled as
 
@@ -165,9 +147,7 @@ $$
 
 The spectral slope $S_{bp}$ controls the wavelength dependence.
 
----
-
-#### Backscattering Fraction
+### Backscattering Fraction
 
 The particulate backscattering fraction is
 
@@ -178,9 +158,7 @@ $$
 
 The parameter $S_{Bp}$ defines the spectral variation of the backscattering fraction.
 
----
-
-#### Total Inherent Optical Properties
+### Total Inherent Optical Properties
 
 The total absorption coefficient is
 
@@ -198,9 +176,7 @@ $$
 
 These inherent optical properties are widely used to describe the ocean color spectrum in bio-optical models.
 
----
-
-### Bio-3 Optical Model (Three-Parameter Model)
+## Bio-3 Optical Model (Three-Parameter Model)
 
 The **Bio-3 model** is a reduced-parameter version of the Bio-2 formulation designed to balance physical realism with retrieval stability.
 

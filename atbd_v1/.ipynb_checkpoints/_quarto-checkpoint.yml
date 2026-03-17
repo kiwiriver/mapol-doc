@@ -5,7 +5,19 @@ book:
   title: "FastMAPOL Algorithm Theoretical Basis Document"
   chapters:
     - index.md
-    - ../chapters/fastmapol_ocean_model.md
+    - ../chapters/fastmapol_retrieval.md
+    - ../chapters/fastmapol_neural_network.md
+    - ../chapters/fastmapol_pace_simulator.md
+    - ../chapters/fastmapol_product.md
+    - ../chapters/fastmapol_validation_harp2.md
+    - ../chapters/fastmapol_validation_spexone.md
+
+  appendices:
+    - ../chapters/fastmapol_model_aerosol.md
+    - ../chapters/fastmapol_model_ocean.md
+    - ../chapters/fastmapol_model_land.md
+    
+bibliography: ../bib/lmfit5.bib
 
 format:
   html:
