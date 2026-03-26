@@ -15,21 +15,21 @@ The output is a **4×4 Mueller matrix** describing polarized surface reflection.
 The bidirectional reflectance distribution matrix $\mathbf{R}$ of land surface converts the downwelling irradiance vector $\mathbf{F}_s$ to upwelling radiance vector $\mathbf{I}$ by:
 
 $$
-\mathbf{I}(\theta_v,\phi)= \frac{1}{\pi}\mathbf{R}(\theta_s,\theta_v,\phi) \\, \cos\theta_s \\, \mathbf{F}_s(\theta_s) 
+\mathbf{I}(\theta_v,\phi_v)= \frac{1}{\pi}\mathbf{R}(\theta_s,\theta_v,\phi_r) \\, |\cos\theta_s| \\, \mathbf{F}_s(\theta_s,\phi_s) 
 $$
 
-where $\theta_s$ is the incident zenith angle, and $\theta_v$ is the upwelling zenith angle, $\phi$ is the relative azimuth angle of the reflected and incident directions.
+where $\theta$ and $\phi$ are the zenith and azimuth angles, respectively; the subscripts $s$ and $v$ denote the incident and reflected directions, respectively; $\phi_r=\phi_v-\phi_s$ is the relative azimuth angle of the reflected and incident directions.
 
 In the FastMAPOL algorithm the matrix $\mathbf{R}$ is modeled by:
 
 $$
-\mathbf{R}(\theta_s,\theta_v,\phi) =
+\mathbf{R}(\theta_s,\theta_v,\phi_r) =
 \left[
 f_{iso}
 +
-f_{vol} K_{vol}(\theta_s,\theta_v,\phi)
+f_{vol} K_{vol}(\theta_s,\theta_v,\phi_r)
 +
-f_{geo} K_{geo}(\theta_s,\theta_v,\phi)
+f_{geo} K_{geo}(\theta_s,\theta_v,\phi_r)
 \right]\mathbf{D}
 +
 B_{pol}\mathbf{K}_{pol}
@@ -45,21 +45,20 @@ where $\mathbf{D}$ is the 4 $\times$ 4 null matrix except for $D_{11}=1$, $\math
 
 | Parameter | Description |
 |---|---|
-| $ \theta_s $ | solar zenith angle |
-| $ \theta_v $ | viewing zenith angle |
-| $ \phi $ | relative azimuth angle |
-| $ f_{iso} $ | isotropic reflectance coefficient |
-| $ f_{vol} $ | volumetric scattering coefficient |
-| $ f_{geo} $ | geometric scattering coefficient |
-| $ B_{pol} $ | polarization strength |
+| $\theta_s$ | solar zenith angle |
+| $\theta_v$ | viewing zenith angle |
+| $\phi_r$ | relative azimuth angle |
+| $f_{iso}$ | isotropic reflectance coefficient |
+| $f_{vol}$ | volumetric scattering coefficient |
+| $f_{geo}$ | geometric scattering coefficient |
+| $B_{pol}$ | polarization strength |
 
 ### Scaled Parameter Formulation (Training Representation)
 
 For parameter sampling (e.g., in neural network training), a scaled formulation similar to **RemoTAP** is used:
 
 $$
-\mathbf{R}(\theta_s,\theta_v,\phi) =
-|\cos\theta_s|
+\mathbf{R}(\theta_s,\theta_v,\phi_r) =
 \left[
 f'_{iso}(\lambda)
 \left(
@@ -69,14 +68,14 @@ f'_{vol} K_{vol}
 +
 f'_{geo} K_{geo}
 \right)
-\right]\mathbf{I}
+\right]\mathbf{D}
 +
 B_{pol}\mathbf{K}_{pol}
 $$
 
 where:
-- $ f'_{iso}(\lambda) $ is spectrally dependent  
-- $ f'_{vol} $, $ f'_{geo} $ are spectrally invariant  
+- $f'_{iso}(\lambda)$ is spectrally dependent \
+- $f'_{vol}$ and $f'_{geo}$ are spectrally invariant  
 
 The relationship to the physical parameters is:
 
@@ -122,23 +121,23 @@ $$
 
 ### RTSOS Geometry Convention
 
-The model follows the **RTSOS photon ray convention**.
+The model follows the **RTSOS light ray convention**, i.e., the zenith and azimuth angles are associated with the directional vector of the ligh ray.
 
 #### Geometry Definitions
 
 | Quantity | RTSOS definition |
 |---|---|
-| solar zenith | $ \theta_s > 90^\circ $ |
-| solar azimuth | $ \phi_s = 0 $ |
-| viewing zenith | $ \theta_v < 90^\circ $ |
-| relative azimuth | $ \phi_r = \phi_v - \phi_s $ |
+| solar zenith | $\theta_s > 90^\circ$ |
+| solar azimuth | $\phi_s = 0$ |
+| viewing zenith | $\theta_v < 90^\circ$ |
+| relative azimuth | $\phi_r = \phi_v - \phi_s$ |
 
 #### Scattering Planes
 
 | Condition | Geometry |
 |---|---|
-| $ \phi_r = 0 $ | forward scattering |
-| $ \phi_r = \pi $ | backscattering |
+| $\phi_r = 0$ | forward scattering |
+| $\phi_r = \pi$ | backscattering |
 
 #### Scattering Angle
 
