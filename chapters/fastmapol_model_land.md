@@ -30,12 +30,12 @@ f_{iso}
 f_{vol} K_{vol}(\theta_s,\theta_v,\phi_r)
 +
 f_{geo} K_{geo}(\theta_s,\theta_v,\phi_r)
-\right]\mathbf{D}
+\right]\mathbf{E}
 +
 B_{pol}\mathbf{K}_{pol}
 $$
 
-where $\mathbf{D}$ is the 4 $\times$ 4 null matrix except for $D_{11}=1$, $\mathbf{K}_{pol}$ is the Fresnel reflection matrix of a flat dielectric surface.
+where $\mathbf{E}$ is the 4 $\times$ 4 null matrix except for $E_{11}=1$, $\mathbf{K}_{pol}$ is the polarization Kernel proportional to the Fresnel reflection matrix.
 
 <!-- **Questions: why $|\cos\theta_s|$ is used here, how $\mathbf{R}$ is defined?**
 ## **I inserted a definition of R to explain the factor $|\cos\theta_s|$. pwzhai 03/26/2026 **
@@ -68,7 +68,7 @@ f'_{vol} K_{vol}
 +
 f'_{geo} K_{geo}
 \right)
-\right]\mathbf{D}
+\right]\mathbf{E}
 +
 B_{pol}\mathbf{K}_{pol}
 $$
@@ -165,10 +165,8 @@ The volumetric kernel represents multiple scattering within vegetation canopies.
 
 $$
 K_{vol} =
-\frac{\left(\frac{\pi}{2}-\Theta\right)\cos\Theta + \sin\Theta}
-{|\mu_s| + |\mu_v|}
--
-\frac{\pi}{4}
+\frac{\left(\frac{\pi}{2}-\Theta_{phase}\right)\cos\Theta_{phase} + \sin\Theta_{phase}}
+{|\mu_s| + |\mu_v|}-\frac{\pi}{4}
 $$
 
 Reference: Wanner et al. (1995), JGR.
@@ -197,7 +195,7 @@ $$
 
 | Parameter | Meaning |
 |---|---|
-| $ B/R $ | vertical-to-horizontal crown ratio |
+| $B/R$ | vertical-to-horizontal crown ratio |
 
 ### Projected Phase Angle
 
@@ -228,11 +226,11 @@ $$
 sec_v = \frac{1}{\cos\theta'_v}
 $$
 
-### Ancillary Function (meaning?)
+### Ancillary Function <!-- (meaning?) -->
 
 $$
 \cos t =
-\frac{H/B
+\frac{H}{B}\frac{
 \sqrt{
 D^2 + (\tan\theta'_s\tan\theta'_v\sin(\phi_r+\pi))^2
 }}
@@ -255,21 +253,14 @@ Otherwise
 
 $$
 O =
-(\arccos(\cos t) - \sin t \cos t)
-\frac{sec_s + sec_v}{\pi}
+\frac{1}{\pi}(t - \sin t \\, \cos t)
+(sec_s + sec_v)
 $$
 
 ## Final Geometric Kernel
 
 $$
-K_{geo} =
-O
--
-sec_s
--
-sec_v
-+
-\frac{1}{2}(1+\cos\xi)sec_s sec_v
+K_{geo} = O - sec_s - sec_v + \frac{1}{2}(1+\cos\xi) \\, sec_s \\,  sec_v
 $$
 
 ## Polarized Surface Reflectance (BPDF)
@@ -353,11 +344,12 @@ $$
 v_{fac} = 0.1
 $$
 
-### Final Surface Mueller Matrix
 
+<!-- This expression is redundant with R above. I suggest to delete it
+### Final Surface Mueller Matrix
+  
 $$
 \mathbf{M} =
-|\mu_s|
 \left[
 f_{iso}
 +
@@ -365,21 +357,16 @@ f_{vol}K_{vol}
 +
 f_{geo}K_{geo}
 \right]
-\mathbf{I}
+\mathbf{E}
 +
 B_{pol}\mathbf{K}_{pol}
 $$
 
 
-Note: The original formulation includes an NDVI factor in $\mathbf{K}_{pol}$, which is absorbed into $ B_{pol} $.
+Note: The original formulation includes an NDVI factor in $\mathbf{K}_{pol}$ , which is absorbed into $B_{pol}$ .
+-->
 
-For scalar radiative transfer simulations, only
-
-$$
-M_{11}
-$$
-
-is used.
+For scalar radiative transfer simulations, only $R_{11}$ is used.
 
 ---
 
