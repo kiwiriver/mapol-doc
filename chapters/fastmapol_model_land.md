@@ -12,23 +12,34 @@ The output is a **4×4 Mueller matrix** describing polarized surface reflection.
 
 ## Surface Reflectance Model
 
-The polarized land surface reflectance is expressed as
+The bidirectional reflectance distribution matrix $\mathbf{R}$ of land surface converts the downwelling irradiance vector $\mathbf{F}_s$ to upwelling radiance vector $\mathbf{I}$ by:
+
+$$
+\mathbf{I}(\theta_v,\phi)= \frac{1}{\pi}\mathbf{R}(\theta_s,\theta_v,\phi) \\, \cos\theta_s \\, \mathbf{F}_s(\theta_s) 
+$$
+
+where $\theta_s$ is the incident zenith angle, and $\theta_v$ is the upwelling zenith angle, $\phi$ is the relative azimuth angle of the reflected and incident directions.
+
+In the FastMAPOL algorithm the matrix $\mathbf{R}$ is modeled by:
 
 $$
 \mathbf{R}(\theta_s,\theta_v,\phi) =
-|\cos\theta_s|
 \left[
 f_{iso}
 +
 f_{vol} K_{vol}(\theta_s,\theta_v,\phi)
 +
 f_{geo} K_{geo}(\theta_s,\theta_v,\phi)
-\right]\mathbf{I}
+\right]\mathbf{D}
 +
 B_{pol}\mathbf{K}_{pol}
 $$
 
-**Questions: why $|\cos\theta_s|$ is used here, how $\mathbf{R}$ is defined?**
+where $\mathbf{D}$ is the 4 $\times$ 4 null matrix except for $D_{11}=1$, $\mathbf{K}_{pol}$ is the Fresnel reflection matrix of a flat dielectric surface.
+
+<!-- **Questions: why $|\cos\theta_s|$ is used here, how $\mathbf{R}$ is defined?**
+## **I inserted a definition of R to explain the factor $|\cos\theta_s|$. pwzhai 03/26/2026 **
+-->
 
 ### Parameter Definitions
 
